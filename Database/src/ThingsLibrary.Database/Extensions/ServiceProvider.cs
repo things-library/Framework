@@ -21,12 +21,23 @@ namespace ThingsLibrary.Entity.Extensions
             // make sure database has all indexes created 
             using (var serviceScope = services.CreateScope())
             {
-                var dbContext = serviceScope.ServiceProvider.GetRequiredService<TContext>();
-                dbContext.Database.EnsureCreated();
-
-                // SEED DATA?
+                serviceScope.UseDataContext<TContext>();
             }
+        }
+
+        /// <summary>
+        /// Test connection to database and create if not exists
+        /// </summary>
+        /// <typeparam name="TContext"></typeparam>
+        /// <param name="services"></param>
+        public static void UseDataContext<TContext>(this IServiceScope serviceScope) where TContext : Database.DataContext
+        {
+            // make sure database has all indexes created 
+
+            var dbContext = serviceScope.ServiceProvider.GetRequiredService<TContext>();
+            dbContext.Database.EnsureCreated();
+
+            // SEED DATA?
         }
     }
 }
-
