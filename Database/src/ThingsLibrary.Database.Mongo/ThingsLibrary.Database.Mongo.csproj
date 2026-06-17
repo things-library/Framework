@@ -23,7 +23,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="MongoDB.EntityFrameworkCore" Version="10.0.1" />
+		<PackageReference Include="MongoDB.EntityFrameworkCore" Version="10.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
