@@ -195,7 +195,8 @@ namespace ThingsLibrary.Database
         public virtual void Prechecks()
         {
             try
-            {  
+            {
+                this.Database.EnsureCreatedAsync().Wait();
 
                 //this.Database.EnsureDeleted();
                 //this.Database.CanConnect();
