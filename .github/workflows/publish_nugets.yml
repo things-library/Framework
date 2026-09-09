@@ -52,8 +52,16 @@ jobs:
     #   run: dotnet nuget push ./Artifacts/Build/*.nupkg -k ${API_TOKEN} -s https://nuget.pkg.github.com/things-library/index.json
     #   env:
     #     API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      
+
+    # Get a short-lived NuGet API key
+    - name: NuGet login (OIDC → temp API key)
+      uses: NuGet/login@v1
+      id: login
+      with:
+        user: LanMark7 # Recommended: use a secret like ${{ secrets.NUGET_USER }} for your nuget.org username (profile name), NOT your email address
+  
+    # Push the package    
     - name: Push to Nuget.org
-      run: dotnet nuget push ./Artifacts/Build/*.nupkg -k ${API_TOKEN} -s https://api.nuget.org/v3/index.json
+      run: dotnet nuget push ./Artifacts/Build/*.nupkg -k ${{steps.login.outputs.NUGET_API_KEY}} -s https://api.nuget.org/v3/index.json
       env:
         API_TOKEN: ${{ secrets.NUGET_API_KEY }}
