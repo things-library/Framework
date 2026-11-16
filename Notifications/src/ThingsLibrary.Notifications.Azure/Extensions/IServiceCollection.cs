@@ -15,8 +15,10 @@ namespace ThingsLibrary.Notification.Azure.Extensions
 {
     public static class IServiceCollectionExtensions
     {
+        private const string ADDRESS_FROM = "address_from";
+
         /// <summary>
-        /// Register Library Services
+        /// Register SMS Notification Services
         /// </summary>
         /// <param name="services"></param>
         public static void AddSmsAzureService(this IServiceCollection services, SmsServiceOptions options)
@@ -26,22 +28,45 @@ namespace ThingsLibrary.Notification.Azure.Extensions
             services.AddScoped<SmsService>();
         }
 
-
         /// <summary>
-        /// Register Library Services
+        /// Register SMS Notification Services
         /// </summary>
         /// <param name="services"></param>
-        public static void AddEmailAzureService(this IServiceCollection services, ItemDto options, string addressFrom, IConfiguration configuration)// EmailServiceOptions options)
+        public static void AddSmsAzureService(this IServiceCollection services, ItemDto options, IConfiguration configuration)// EmailServiceOptions options)
         {
-            var emailConnectionString = configuration.TryGetConnectionString(options["connection_string_variable"] ?? "Notifications");
+            var emailConnectionString = configuration.TryGetConnectionString(options["connection_string_variable"] ?? string.Empty);
             
-            var emailOptions = new EmailServiceOptions(emailConnectionString, addressFrom);
+            var smsOptions = new SmsServiceOptions(emailConnectionString, options[ADDRESS_FROM] ?? string.Empty);
 
-            services.AddSingleton(emailOptions);
+            services.AddSmsAzureService(smsOptions);            
+        }
+
+
+        /// <summary>
+        /// Register Email Notification Services
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddEmailAzureService(this IServiceCollection services, EmailServiceOptions options)
+        {                        
+            services.AddSingleton(options);
 
             services.AddScoped<EmailNotificationService>();
         }
 
 
+        /// <summary>
+        /// Register Email Notification Services
+        /// </summary>
+        /// <param name="services"></param>
+        public static void AddEmailAzureService(this IServiceCollection services, ItemDto options, IConfiguration configuration)// EmailServiceOptions options)
+        {
+            var emailConnectionString = configuration.TryGetConnectionString(options["connection_string_variable"] ?? string.Empty);
+
+            var emailOptions = new EmailServiceOptions(emailConnectionString, options[ADDRESS_FROM] ?? string.Empty);
+
+            services.AddSingleton(emailOptions);
+
+            services.AddScoped<EmailNotificationService>();
+        }
     }
 }

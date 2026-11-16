@@ -23,18 +23,19 @@ namespace ThingsLibrary.Tests.DataType.Extensions
         }
 
         [TestMethod]
-        [DataRow(1.0f, 1, 1.0f)]
-        [DataRow(1.23456f, 1, 1.2f)]
-        [DataRow(1.23456f, 2, 1.23f)]
-        [DataRow(1.23556f, 3, 1.236f)]
-        [DataRow(123.456f, 1, 123.5f)]
-        [DataRow(123.456f, 2, 123.46f)]
-        public void Round(float testValue, int decimals, float expectedValue)
+        [DataRow(1.0f, 1, "1")]
+        [DataRow(1.23456f, 1, "1.2")]
+        [DataRow(1.23456f, 2, "1.23")]
+        [DataRow(1.23556f, 3, "1.236")]
+        [DataRow(123.456f, 1, "123.5")]
+        [DataRow(123.456f, 2, "123.46")]
+        public void Round(float testValue, int decimals, string expectedValue)
         {
             var testValueDec = (decimal)testValue; //decimal is not a primitive type and can't be used.. so we cast it to decimal from our float test data
-            var expectedDec = (decimal)expectedValue;
+            
+            var actualValue = testValueDec.Round(decimals).ToString();
 
-            Assert.AreEqual(expectedDec, testValueDec.Round(decimals));
+            Assert.AreEqual(expectedValue, actualValue);
         }
     }
 }

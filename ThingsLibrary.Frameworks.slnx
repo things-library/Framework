@@ -26,7 +26,6 @@
   <Folder Name="/Database/">
     <Project Path="Database/src/ThingsLibrary.Database.Cosmos/ThingsLibrary.Database.Cosmos.csproj" />
     <Project Path="Database/src/ThingsLibrary.Database.Mongo/ThingsLibrary.Database.Mongo.csproj" />
-    <Project Path="Database/src/ThingsLibrary.Database.Postgres/ThingsLibrary.Database.Postgres.csproj" />
     <Project Path="Database/src/ThingsLibrary.Database.SqlServer/ThingsLibrary.Database.SqlServer.csproj" />
     <Project Path="Database/src/ThingsLibrary.Database/ThingsLibrary.Database.csproj" />
   </Folder>

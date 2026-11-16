@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net10.0</TargetFrameworks>
+		<TargetFrameworks>net11.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<IsPackable>true</IsPackable>
@@ -23,7 +23,7 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="10.0.12" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Cosmos" Version="11.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
