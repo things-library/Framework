@@ -64,12 +64,12 @@ namespace ThingsLibrary.Database
                 modelBuilder.ApplyConfigurationsFromAssembly(assembly);
             }
 
-            //turn off default OnDelete:cascade
-            Log.Information($"= Restricting Delete behaviors...");
-            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
-            {
-                relationship.DeleteBehavior = DeleteBehavior.Restrict;
-            }
+            ////turn off default OnDelete:cascade
+            //Log.Information($"= Restricting Delete behaviors...");
+            //foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
+            //{
+            //    relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            //}
         }
 
         /// <summary>
